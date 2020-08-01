@@ -1,6 +1,7 @@
 class UssdSessionsController < ApplicationController
-  before_action :set_ussd_session, only: [:show, :edit, :update, :destroy]
   skip_before_action :verify_authenticity_token
+
+  before_action :set_ussd_session, only: [:show, :edit, :update, :destroy]
 
   # GET /ussd_sessions
   # GET /ussd_sessions.json
@@ -25,6 +26,7 @@ class UssdSessionsController < ApplicationController
   # POST /ussd_sessions
   # POST /ussd_sessions.json
   def create
+    puts ussd_session_params
     @ussd_session = UssdSession.new(ussd_session_params)
 
     respond_to do |format|
@@ -70,6 +72,12 @@ class UssdSessionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def ussd_session_params
-      params.permit(:session_id, :phone_number, :network_code, :service_code, :text)
+      transform_params_if_multipart!.slice('session_id', 'phone_number', 'network_code', 'service_code', 'text')
+    end
+
+    def transform_params_if_multipart!
+        ActiveSupport::JSON.decode(params.to_json).deep_transform_keys!(&:underscore)
     end
 end
+
+
