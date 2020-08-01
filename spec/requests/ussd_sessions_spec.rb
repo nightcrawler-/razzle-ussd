@@ -23,8 +23,16 @@ RSpec.describe "/ussd_sessions", type: :request do
     {session_id: '101', phone_number: '102', service_code: '110', network_code: '11112', text: 'we*Frederick N*12345'}
   }
 
+  let(:valid_attributes_name) {
+    {session_id: '101', phone_number: '102', service_code: '110', network_code: '11112', text: 'we'}
+  }
+
+  let(:valid_attributes_id) {
+    {session_id: '101', phone_number: '102', service_code: '110', network_code: '11112', text: 'we*Frederick N'}
+  }
+
   let(:invalid_attributes) {
-    {sessionId: '101', phoneNumber: '102'}
+    { sessionIXd: '101'}
   }
 
   describe "GET /index" do
@@ -75,6 +83,16 @@ RSpec.describe "/ussd_sessions", type: :request do
         post ussd_sessions_url, params:  valid_attributes_register
         expect(response.body).to eq("END You have successfully been registered on myKeekapu")
       end
+
+      it "returns the USSD message for name request" do
+        post ussd_sessions_url, params:  valid_attributes_name
+        expect(response.body).to eq("CON What is your name?")
+      end
+
+      it "returns the USSD message for ID number request" do
+        post ussd_sessions_url, params:  valid_attributes_id
+        expect(response.body).to eq("CON Please enter your ID number")
+      end
     end
 
     context "with invalid parameters" do
@@ -106,7 +124,7 @@ RSpec.describe "/ussd_sessions", type: :request do
 
       it "redirects to the ussd_session" do
         ussd_session = UssdSession.create! valid_attributes
-        patch ussd_session_url(ussd_session), params: { ussd_session: new_attributes }
+        patch ussd_session_url(ussd_session), params: new_attributes 
         ussd_session.reload
         expect(response).to redirect_to(ussd_session_url(ussd_session))
       end
@@ -115,7 +133,7 @@ RSpec.describe "/ussd_sessions", type: :request do
     context "with invalid parameters" do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         ussd_session = UssdSession.create! valid_attributes
-        patch ussd_session_url(ussd_session), params: { ussd_session: invalid_attributes }
+        patch ussd_session_url(ussd_session), params: invalid_attributes 
         expect(response).to_not be_successful
       end
     end

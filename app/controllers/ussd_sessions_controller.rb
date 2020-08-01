@@ -46,9 +46,9 @@ class UssdSessionsController < ApplicationController
       if @ussd_session.update(ussd_session_params)
         format.html { redirect_to @ussd_session, notice: 'Ussd session was successfully updated.' }
         format.json { render :show, status: :ok, location: @ussd_session }
-      else
-        format.html { render :edit }
-        format.json { render json: @ussd_session.errors, status: :unprocessable_entity }
+      # else # This branch will never be reached as we don't check for any other validation except presence only
+      #   format.html { render :edit }
+      #   format.json { render json: @ussd_session.errors, status: :unprocessable_entity }
       end
     end
   end
