@@ -70,6 +70,6 @@ class UssdSessionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def ussd_session_params
-      params.require(:ussd_session).permit(:session_id, :phone_number, :network_code, :service_code, :text)
+      params.permit(:session_id, :phone_number, :network_code, :service_code, :text)
     end
 end
