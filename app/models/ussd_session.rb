@@ -21,7 +21,7 @@ class UssdSession < ApplicationRecord
 
     def response
 
-        if !text.blank?
+        if text.present?
             data = self.text.split('*')
 
             case data.length()  
