@@ -24,21 +24,21 @@ class UssdSession < ApplicationRecord
         if text.nil?
             # IF empty, return this
             # But if empty and user has been registered, do something else
-            return 'CON Welcome to myKeekapu,  ' + self.phone_number + "\nReply with any character to register"
+            return 'CON Welcome to myKeekapu,  ' + self.phone_number + "\nReply with any character to register"   
+        end
 
-        else
+        data = self.text.split('*')
 
-            data = self.text.split('*')
+        case data.length()
 
-            case data.length()
-    
-                when 1
-                    'CON What is your name?'
-                when 2
-                    'CON Please enter your ID number'
-                when 3
-                    'END You have successfully been registered on myKeekapu'
-            end
+            when 0 
+                return 'CON Welcome to myKeekapu,  ' + self.phone_number + "\nReply with any character to register"   
+            when 1
+                return 'CON What is your name?'
+            when 2
+                return 'CON Please enter your ID number'
+            when 3
+                return 'END You have successfully been registered on myKeekapu'
         end
 
     end
