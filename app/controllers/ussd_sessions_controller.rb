@@ -31,7 +31,7 @@ class UssdSessionsController < ApplicationController
     respond_to do |format|
       if @ussd_session.save
         format.html { redirect_to @ussd_session, notice: 'Ussd session was successfully created.' }
-        format.json { render plain: @ussd_session.response}
+        format.json { render plain: 'CON Welcome to myKeekapu,  ' + @ussd_session.phone_number + "\n1. Register"}
       else
         format.html { render :new }
         format.json { render json: @ussd_session.errors, status: :unprocessable_entity }
