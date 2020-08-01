@@ -1,0 +1,13 @@
+Parameter	Description
+sessionId
+String	A unique value generated when the session starts and sent every time a mobile subscriber response has been received.
+phoneNumber
+String	The number of the mobile subscriber interacting with your ussd application.
+networkCode
+String	The telco of the phoneNumber interacting with your ussd application.
+serviceCode
+String	This is the USSD code assigned to your application
+text
+String
+
+rails g scaffold UssdSession session_id:string phone_number:string network_code:string service_code:string text:text

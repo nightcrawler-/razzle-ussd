@@ -40,6 +40,7 @@ module RazzleUssd
         Zeitwerk::Loader.eager_load_all
       end
     end
-    
+
+    config.middleware.use "SnakyCamel::Middleware"
   end
 end

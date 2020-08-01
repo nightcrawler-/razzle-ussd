@@ -1,0 +1,42 @@
+<%= form_with(model: ussd_session, local: true) do |form| %>
+  <% if ussd_session.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ussd_session.errors.count, "error") %> prohibited this ussd_session from being saved:</h2>
+
+      <ul>
+        <% ussd_session.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :session_id %>
+    <%= form.text_field :session_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone_number %>
+    <%= form.text_field :phone_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :network_code %>
+    <%= form.text_field :network_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :service_code %>
+    <%= form.text_field :service_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :text %>
+    <%= form.text_area :text %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

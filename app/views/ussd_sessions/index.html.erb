@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Ussd Sessions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Session</th>
+      <th>Phone number</th>
+      <th>Network code</th>
+      <th>Service code</th>
+      <th>Text</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ussd_sessions.each do |ussd_session| %>
+      <tr>
+        <td><%= ussd_session.session_id %></td>
+        <td><%= ussd_session.phone_number %></td>
+        <td><%= ussd_session.network_code %></td>
+        <td><%= ussd_session.service_code %></td>
+        <td><%= ussd_session.text %></td>
+        <td><%= link_to 'Show', ussd_session %></td>
+        <td><%= link_to 'Edit', edit_ussd_session_path(ussd_session) %></td>
+        <td><%= link_to 'Destroy', ussd_session, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ussd Session', new_ussd_session_path %>
