@@ -34,8 +34,20 @@ Technical requirements spec
 1. rails new razzle-ussd -T -d postgresql
 2. Database name, username/pwd
 3. RSpec gem and initialization
-4. ERD Gem and configuration
-5. Annotate gem
+4. ERD Gem and configuration `bundle exec rails g erd:install`
+5. Annotate gem: `bundle exec rails g annotate:install`
+
+ERD config:
+```
+    config.time_zone = 'Nairobi'
+
+    # This config fixes failure to generate ERD
+    if Rails.env.development?
+      def eager_load!
+        Zeitwerk::Loader.eager_load_all
+      end
+    end
+```
 
 ### Setup
 
