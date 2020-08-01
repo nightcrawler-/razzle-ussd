@@ -19,5 +19,27 @@ class UssdSession < ApplicationRecord
 
     ##################### Associations #####################################
 
+    def response
 
+        if text.nil?
+            # IF empty, return this
+            # But if empty and user has been registered, do something else
+            return 'CON Welcome to myKeekapu,  ' + self.phone_number + "\nReply with any character to register"
+
+        else
+
+            data = self.text.split('*')
+
+            case data.length()
+    
+                when 1
+                    'CON What is your name?'
+                when 2
+                    'CON Please enter your ID number'
+                when 3
+                    'END You have successfully been registered on myKeekapu'
+            end
+        end
+
+    end
 end

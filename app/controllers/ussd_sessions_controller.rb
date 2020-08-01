@@ -26,13 +26,12 @@ class UssdSessionsController < ApplicationController
   # POST /ussd_sessions
   # POST /ussd_sessions.json
   def create
-    puts ussd_session_params
-    @ussd_session = UssdSession.new(ussd_session_params)
+    @ussd_session = UssdSession.find_or_initialize_by(ussd_session_params)
 
     respond_to do |format|
       if @ussd_session.save
         format.html { redirect_to @ussd_session, notice: 'Ussd session was successfully created.' }
-        format.json { render plain: 'CON Welcome to myKeekapu,  ' + @ussd_session.phone_number + "\n1. Register"}
+        format.json { render plain: @ussd_session.response}
       else
         format.html { render :new }
         format.json { render json: @ussd_session.errors, status: :unprocessable_entity }
