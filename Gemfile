@@ -35,6 +35,21 @@ group :development, :test do
   # Testing things
   gem 'rspec-rails', '~> 4.0.1'
 
+  gem 'rspec_junit_formatter'
+
+  # Cleaner output when running tests
+  gem 'minitest-reporters'
+
+  # Code coverage -- statements on top, read docs
+  gem 'simplecov', "0.17"
+
+  gem 'shoulda-matchers'
+
+  gem 'rails-controller-testing'
+
+  # test output formatter
+  gem 'fuubar'
+
 end
 
 group :development do
