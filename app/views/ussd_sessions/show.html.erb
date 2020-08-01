@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Session:</strong>
+  <%= @ussd_session.session_id %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @ussd_session.phone_number %>
+</p>
+
+<p>
+  <strong>Network code:</strong>
+  <%= @ussd_session.network_code %>
+</p>
+
+<p>
+  <strong>Service code:</strong>
+  <%= @ussd_session.service_code %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @ussd_session.text %>
+</p>
+
+<%= link_to 'Edit', edit_ussd_session_path(@ussd_session) %> |
+<%= link_to 'Back', ussd_sessions_path %>

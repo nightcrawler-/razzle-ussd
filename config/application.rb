@@ -31,5 +31,14 @@ module RazzleUssd
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.time_zone = 'Nairobi'
+
+    # This config fixes failure to generate ERD
+    if Rails.env.development?
+      def eager_load!
+        Zeitwerk::Loader.eager_load_all
+      end
+    end
   end
 end
