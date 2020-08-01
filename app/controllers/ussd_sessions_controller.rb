@@ -1,5 +1,6 @@
 class UssdSessionsController < ApplicationController
   before_action :set_ussd_session, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token
 
   # GET /ussd_sessions
   # GET /ussd_sessions.json

@@ -11,3 +11,6 @@ text
 String
 
 rails g scaffold UssdSession session_id:string phone_number:string network_code:string service_code:string text:text
+
+# Things to do:
+1.  skip_before_action :verify_authenticity_token -- since the post requests wont be coming from a web form. Should have built an API only app? Not really, we might need the web display
