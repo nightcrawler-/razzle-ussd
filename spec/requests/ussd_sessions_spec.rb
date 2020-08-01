@@ -16,11 +16,15 @@ RSpec.describe "/ussd_sessions", type: :request do
   # UssdSession. As you add validations to UssdSession, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {session_id: '101', phone_number: '102', service_code: '110', network_code: '11112'}
+  }
+
+  let(:valid_attributes_register) {
+    {session_id: '101', phone_number: '102', service_code: '110', network_code: '11112', text: 'we*Frederick N*12345'}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {sessionId: '101', phoneNumber: '102'}
   }
 
   describe "GET /index" do
@@ -58,13 +62,18 @@ RSpec.describe "/ussd_sessions", type: :request do
     context "with valid parameters" do
       it "creates a new UssdSession" do
         expect {
-          post ussd_sessions_url, params: { ussd_session: valid_attributes }
+          post ussd_sessions_url, params:  valid_attributes 
         }.to change(UssdSession, :count).by(1)
       end
 
-      it "redirects to the created ussd_session" do
-        post ussd_sessions_url, params: { ussd_session: valid_attributes }
-        expect(response).to redirect_to(ussd_session_url(UssdSession.last))
+      it "returns the USSD message for the initial request" do
+        post ussd_sessions_url, params:  valid_attributes 
+        expect(response.body).to eq("CON Welcome to myKeekapu,  102\nReply with any character to register")
+      end
+
+      it "returns the USSD message for the regsitration complete" do
+        post ussd_sessions_url, params:  valid_attributes_register
+        expect(response.body).to eq("END You have successfully been registered on myKeekapu")
       end
     end
 
@@ -85,14 +94,14 @@ RSpec.describe "/ussd_sessions", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {session_id: '101', phone_number: '102', service_code: '110', network_code: '11112', text: 'we*Frederick N*1234'}
       }
 
       it "updates the requested ussd_session" do
         ussd_session = UssdSession.create! valid_attributes
         patch ussd_session_url(ussd_session), params: { ussd_session: new_attributes }
         ussd_session.reload
-        skip("Add assertions for updated state")
+        expect(response).to_not be_successful
       end
 
       it "redirects to the ussd_session" do
@@ -107,7 +116,7 @@ RSpec.describe "/ussd_sessions", type: :request do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         ussd_session = UssdSession.create! valid_attributes
         patch ussd_session_url(ussd_session), params: { ussd_session: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to_not be_successful
       end
     end
   end

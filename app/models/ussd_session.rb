@@ -15,7 +15,7 @@ class UssdSession < ApplicationRecord
 
     ##################### Validations ######################################
 
-    validates_presence_of   :session_id, :phone_number, :service_code
+    validates_presence_of   :session_id, :phone_number, :service_code, :network_code
 
     ##################### Associations #####################################
 
