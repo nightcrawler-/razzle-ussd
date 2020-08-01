@@ -1,5 +1,7 @@
 # razzle-ussd
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/d9f0319f5f30906cf0a3/maintainability)](https://codeclimate.com/repos/5f255bd90fa09001a0003c71/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/d9f0319f5f30906cf0a3/test_coverage)](https://codeclimate.com/repos/5f255bd90fa09001a0003c71/test_coverage) [![CircleCI](https://circleci.com/gh/Cafrecode/razzle-ussd.svg?style=shield&circle-token=46900e686dde7ad6d31c5de3eaa484514a3120f2)](https://circleci.com/gh/Cafrecode/razzle-ussd)
+
 ## About
 
 This is a USSD Application meant to handle sessions initiated by Africa's Talking's gateway.
