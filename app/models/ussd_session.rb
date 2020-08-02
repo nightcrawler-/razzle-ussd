@@ -33,7 +33,7 @@ class UssdSession < ApplicationRecord
     ##################### Behaviours/Other Properties #######################
 
     def response
-
+        # Make this a state machine? Handle sessions gracefully. for orders, only have specific routes, registration only for variables
         if text.present? #if text is not present, it is the first ussd request
             data = self.text.split('*')
 
