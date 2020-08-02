@@ -49,9 +49,8 @@ class UssdSession < ApplicationRecord
                     if @customer.save
                         return 'END ' +  @customer.name + ', you have successfully been registered on myKeekapu'
                     else
-                        return 'END ' + @customer.errors.full_messages.to_s + '\n Please try again after resolving the errors'
+                        return "END Sorry, unable to complete registration. \n" + @customer.errors.full_messages.join(",\n") + "\n\nPlease try again after resolving the errors"
                     end
-                
             end
         else
             return 'CON Welcome to myKeekapu,  ' + self.phone_number + "\nReply with any character to register"   
