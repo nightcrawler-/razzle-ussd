@@ -9,6 +9,7 @@
 #  text         :text
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  customer_id  :bigint
 #  session_id   :string
 #
 class UssdSession < ApplicationRecord
@@ -18,6 +19,16 @@ class UssdSession < ApplicationRecord
     validates_presence_of   :session_id, :phone_number, :service_code, :network_code
 
     ##################### Associations #####################################
+
+    belongs_to  :customer, optional: true
+
+    ##################### Callbacks #########################################
+
+    # Find customer by phone number if existing and attach to session
+    
+    before_create   :attach_customer
+
+    ##################### Behaviours/Other Properties #######################
 
     def response
 
@@ -36,5 +47,10 @@ class UssdSession < ApplicationRecord
             return 'CON Welcome to myKeekapu,  ' + self.phone_number + "\nReply with any character to register"   
         end
 
+    end
+
+    private
+    def attach_customer
+        self.customer = Customer.find_by_phone_number(self.phone_number)
     end
 end
