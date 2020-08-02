@@ -4,7 +4,7 @@ RSpec.describe "ussd_sessions/edit", type: :view do
   before(:each) do
     @ussd_session = assign(:ussd_session, UssdSession.create!(
       session_id: "MyString",
-      phone_number: "MyString",
+      phone_number: "0723006561",
       network_code: "MyString",
       service_code: "MyString",
       text: "MyText"

@@ -16,19 +16,19 @@ RSpec.describe "/ussd_sessions", type: :request do
   # UssdSession. As you add validations to UssdSession, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    {session_id: '101', phone_number: '102', service_code: '110', network_code: '11112'}
+    {session_id: '101', phone_number: '0723006561', service_code: '110', network_code: '11112'}
   }
 
   let(:valid_attributes_register) {
-    {session_id: '101', phone_number: '102', service_code: '110', network_code: '11112', text: 'we*Frederick N*12345'}
+    {session_id: '101', phone_number: '0723006561', service_code: '110', network_code: '11112', text: 'we*Frederick N*12345'}
   }
 
   let(:valid_attributes_name) {
-    {session_id: '101', phone_number: '102', service_code: '110', network_code: '11112', text: 'we'}
+    {session_id: '101', phone_number: '0723006561', service_code: '110', network_code: '11112', text: 'we'}
   }
 
   let(:valid_attributes_id) {
-    {session_id: '101', phone_number: '102', service_code: '110', network_code: '11112', text: 'we*Frederick N'}
+    {session_id: '101', phone_number: '0723006561', service_code: '110', network_code: '11112', text: 'we*Frederick N'}
   }
 
   let(:invalid_attributes) {
@@ -76,7 +76,7 @@ RSpec.describe "/ussd_sessions", type: :request do
 
       it "returns the USSD message for the initial request" do
         post ussd_sessions_url, params:  valid_attributes 
-        expect(response.body).to eq("CON Welcome to myKeekapu,  102\nReply with any character to register")
+        expect(response.body).to eq("CON Welcome to myKeekapu,  0723006561\nReply with any character to register")
       end
 
       it "returns the USSD message for the regsitration complete" do
@@ -112,7 +112,7 @@ RSpec.describe "/ussd_sessions", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        {session_id: '101', phone_number: '102', service_code: '110', network_code: '11112', text: 'we*Frederick N*1234'}
+        {session_id: '101', phone_number: '0723006561', service_code: '110', network_code: '11112', text: 'we*Frederick N*1234'}
       }
 
       it "updates the requested ussd_session" do

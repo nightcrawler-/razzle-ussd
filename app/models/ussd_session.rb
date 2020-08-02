@@ -18,6 +18,8 @@ class UssdSession < ApplicationRecord
 
     validates_presence_of   :session_id, :phone_number, :service_code, :network_code
 
+    validates   :phone_number, telephone_number: {country: 'KE', types: [:fixed_line, :mobile]}
+
     ##################### Associations #####################################
 
     belongs_to  :customer, optional: true
@@ -25,7 +27,7 @@ class UssdSession < ApplicationRecord
     ##################### Callbacks #########################################
 
     # Find customer by phone number if existing and attach to session
-    
+
     before_create   :attach_customer
 
     ##################### Behaviours/Other Properties #######################

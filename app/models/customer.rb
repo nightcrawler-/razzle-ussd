@@ -20,7 +20,9 @@ class Customer < ApplicationRecord
     validates :phone_number, telephone_number: {country: 'KE', types: [:fixed_line, :mobile]}
 
     validates_format_of :national_id, with: /^[0-9]{7,8}$/i, multiline: true
-    
+
+    validates_uniqueness_of :national_id
+
     ####################### Associations ##################################
 
     has_many    :ussd_sessions

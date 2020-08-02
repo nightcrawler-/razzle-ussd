@@ -19,7 +19,7 @@ RSpec.describe UssdSession, type: :model do
   subject {
     described_class.new(
       session_id: 'miaw',
-      phone_number: '1234',
+      phone_number: '0723006561',
       service_code: 'aha',
       network_code: 'woooho'
     )
