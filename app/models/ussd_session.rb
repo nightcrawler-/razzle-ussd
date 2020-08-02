@@ -34,7 +34,7 @@ class UssdSession < ApplicationRecord
 
     def response
 
-        if text.present?
+        if text.present? #if text is not present, it is the first ussd request
             data = self.text.split('*')
 
             case data.length()  
@@ -53,7 +53,11 @@ class UssdSession < ApplicationRecord
                     end
             end
         else
-            return 'CON Welcome to myKeekapu,  ' + self.phone_number + "\nReply with any character to register"   
+            if self.customer.blank?
+                return 'CON Welcome to myKeekapu,  ' + self.phone_number + "\n1. Register"  
+            else
+                return "CON Hello " + self.customer.name + ", welcome back to myKeekapu. \n2.Place order\n3.My Orders"
+            end
         end
 
     end

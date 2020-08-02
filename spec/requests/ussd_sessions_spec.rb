@@ -14,7 +14,7 @@
 
 RSpec.describe "/ussd_sessions", type: :request do
   # UssdSession. As you add validations to UssdSession, be sure to
-  # adjust the attributes here as well.
+  # adjust the attributes here as well.  
   let(:valid_attributes) {
     {session_id: '101', phone_number: '0723006561', service_code: '110', network_code: '11112'}
   }
@@ -33,6 +33,10 @@ RSpec.describe "/ussd_sessions", type: :request do
 
   let(:invalid_attributes) {
     { sessionIXd: '101'}
+  }
+
+  let(:invalid_attributes_register) {
+    {session_id: '101', phone_number: '0723006561', service_code: '110', network_code: '11112', text: 'we*Frederick 23N*12345678333'}
   }
 
   describe "GET /index" do
@@ -74,9 +78,14 @@ RSpec.describe "/ussd_sessions", type: :request do
         }.to change(UssdSession, :count).by(1)
       end
 
+      it "returns the USSD message for an erroneous regitration attempt" do
+        post ussd_sessions_url, params:  invalid_attributes_register 
+        expect(response.body).to eq("END Sorry, unable to complete registration. \nName is invalid,\nNational is invalid\n\nPlease try again after resolving the errors")
+      end
+
       it "returns the USSD message for the initial request" do
         post ussd_sessions_url, params:  valid_attributes 
-        expect(response.body).to eq("CON Welcome to myKeekapu,  0723006561\nReply with any character to register")
+        expect(response.body).to eq("CON Welcome to myKeekapu,  0723006561\n1. Register")
       end
 
       it "returns the USSD message for the regsitration complete" do
