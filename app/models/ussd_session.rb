@@ -28,7 +28,7 @@ class UssdSession < ApplicationRecord
 
     # Find customer by phone number if existing and attach to session
 
-    before_create   :attach_customer
+    before_save   :attach_customer
 
     ##################### Behaviours/Other Properties #######################
 
