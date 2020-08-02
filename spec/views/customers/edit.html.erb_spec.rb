@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe "customers/edit", type: :view do
   before(:each) do
     @customer = assign(:customer, Customer.create!(
-      name: "MyString",
-      phone_number: "MyString",
-      national_id: "MyString"
+      name: "Lizzy K",
+      phone_number: "0723006561",
+      national_id: "2345677"
     ))
   end
 
