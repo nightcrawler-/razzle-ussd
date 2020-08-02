@@ -20,7 +20,7 @@ RSpec.describe "/ussd_sessions", type: :request do
   }
 
   let(:valid_attributes_register) {
-    {session_id: '101', phone_number: '0723006561', service_code: '110', network_code: '11112', text: 'we*Frederick N*12345'}
+    {session_id: '101', phone_number: '0723006561', service_code: '110', network_code: '11112', text: 'we*Frederick N*12345678'}
   }
 
   let(:valid_attributes_name) {
@@ -81,7 +81,7 @@ RSpec.describe "/ussd_sessions", type: :request do
 
       it "returns the USSD message for the regsitration complete" do
         post ussd_sessions_url, params:  valid_attributes_register
-        expect(response.body).to eq("END You have successfully been registered on myKeekapu")
+        expect(response.body).to eq("END Frederick N, you have successfully been registered on myKeekapu")
       end
 
       it "returns the USSD message for name request" do

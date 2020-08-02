@@ -42,8 +42,16 @@ class UssdSession < ApplicationRecord
                     return 'CON What is your name?'
                 when 2
                     return 'CON Please enter your ID number'
-                when 3
-                    return 'END You have successfully been registered on myKeekapu'
+                when 3 
+                    # create customer
+                    # return model errors if any, well this should be done elsewhere, review gitlab code or other rails apps for hints
+                    @customer = Customer.new(name: data[1], national_id: data[2], phone_number: self.phone_number)
+                    if @customer.save
+                        return 'END ' +  @customer.name + ', you have successfully been registered on myKeekapu'
+                    else
+                        return 'END ' + @customer.errors.full_messages.to_s + '\n Please try again after resolving the errors'
+                    end
+                
             end
         else
             return 'CON Welcome to myKeekapu,  ' + self.phone_number + "\nReply with any character to register"   
