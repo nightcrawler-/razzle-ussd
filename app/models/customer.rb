@@ -25,6 +25,6 @@ class Customer < ApplicationRecord
 
     ####################### Associations ##################################
 
-    has_many    :ussd_sessions
+    has_many    :ussd_sessions, foreign_key: :customer_id
 
 end
