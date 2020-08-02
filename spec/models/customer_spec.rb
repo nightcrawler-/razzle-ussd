@@ -42,4 +42,8 @@ RSpec.describe Customer, type: :model do
     end
   end
 
+  describe "Associations" do
+    it { should have_many(:ussd_sessions) }
+  end
+
 end

@@ -33,4 +33,8 @@ RSpec.describe UssdSession, type: :model do
 
   end
 
+  describe "Associations" do
+    it { should belong_to(:customer).without_validating_presence }
+  end
+
 end
