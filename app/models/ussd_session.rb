@@ -39,24 +39,24 @@ class UssdSession < ApplicationRecord
 
             case data.length()  
                 when 1
-                    return 'CON What is your name?'
+                    "CON What is your name?"
                 when 2
-                    return 'CON Please enter your ID number'
+                    "CON Please enter your ID number"
                 when 3 
                     # create customer
                     # return model errors if any, well this should be done elsewhere, review gitlab code or other rails apps for hints
                     @customer = Customer.new(name: data[1], national_id: data[2], phone_number: self.phone_number)
                     if @customer.save
-                        return 'END ' +  @customer.name + ', you have successfully been registered on myKeekapu'
+                         "END " +  @customer.name + ", you have successfully been registered on myKeekapu"
                     else
-                        return "END Sorry, unable to complete registration. \n" + @customer.errors.full_messages.join(",\n") + "\n\nPlease try again after resolving the errors"
+                         "END Sorry, unable to complete registration. \n" + @customer.errors.full_messages.join(",\n") + "\n\nPlease try again after resolving the errors"
                     end
             end
         else
             if self.customer.blank?
-                return 'CON Welcome to myKeekapu,  ' + self.phone_number + "\n1. Register"  
+                 "CON Welcome to myKeekapu,  " + self.phone_number + "\n1. Register"  
             else
-                return "CON Hello " + self.customer.name + ", welcome back to myKeekapu. \n2.Place order\n3.My Orders"
+                 "CON Hello " + self.customer.name + ", welcome back to myKeekapu. \n2.Place order\n3.My Orders"
             end
         end
 
