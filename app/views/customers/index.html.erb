@@ -1,0 +1,56 @@
+<% content_for :customers do %>
+active
+<% end %>
+
+<!-- Basic Tables start -->
+<div class="row" id="basic-table">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Customers</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <p class="card-text">Below is a list and details of Customers registered on
+                        the system</p>
+                    <!-- Table with outer spacing -->
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>                                    <th>Name</th>
+                                                                        <th>Phone number</th>
+                                                                        <th>National</th>
+                                    
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <% @customers.each do |customer| %>
+                                    <tr>                                        <td><%= customer.name %></td>
+                                                                                <td><%= customer.phone_number %></td>
+                                                                                <td><%= customer.national_id %></td>
+                                        
+                                        <td><%= link_to "View" , customer %>
+                                            <%= link_to "Edit" , edit_customer_path(customer) %>
+                                        </td>
+                                    </tr>
+                                    <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>
+                    <div class="digg_pagination">
+                        <!--   will_paginate @organizations, :container => false -->
+
+                    </div>
+                    </p>
+                     <div class="flex items-center justify-start mt-6">
+                            <%= link_to 'New Customer' , new_customer_path, class: "btn btn-outline-dark mr-1 mb-1" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Basic Tables end -->
