@@ -56,7 +56,7 @@ class UssdSession < ApplicationRecord
             if self.customer.blank?
                  "CON Welcome to County Government of Kakamega,  " + self.phone_number + "\n1. Register"  
             else
-                 "CON Hello " + self.customer.name + ", welcome back to myKeekapu. \n2.Place order\n3.My Orders"
+                 "CON Hello " + self.customer.name + ", welcome back to County Government of Kakamega. \n2. Make payment\n3. Payment history"
             end
         end
 
