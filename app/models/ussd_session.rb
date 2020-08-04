@@ -47,14 +47,14 @@ class UssdSession < ApplicationRecord
                     # return model errors if any, well this should be done elsewhere, review gitlab code or other rails apps for hints
                     @customer = Customer.new(name: data[1], national_id: data[2], phone_number: self.phone_number)
                     if @customer.save
-                         "END " +  @customer.name + ", you have successfully been registered on myKeekapu"
+                         "END " +  @customer.name + ", you have successfully been registered on County Government of Kakamega"
                     else
                          "END Sorry, unable to complete registration. \n" + @customer.errors.full_messages.join(",\n") + "\n\nPlease try again after resolving the errors"
                     end
             end
         else
             if self.customer.blank?
-                 "CON Welcome to myKeekapu,  " + self.phone_number + "\n1. Register"  
+                 "CON Welcome to County Government of Kakamega,  " + self.phone_number + "\n1. Register"  
             else
                  "CON Hello " + self.customer.name + ", welcome back to myKeekapu. \n2.Place order\n3.My Orders"
             end
